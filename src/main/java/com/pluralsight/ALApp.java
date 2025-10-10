@@ -66,6 +66,7 @@ public class ALApp {
         System.out.println("Enter Date YYY-MM-DD");
         String date = scan.nextLine();
 
-
+        System.out.println("Enter Deposit");
+        System.out.println("Amount $" + amount);
     }
 }
