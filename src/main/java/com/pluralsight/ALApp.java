@@ -56,7 +56,16 @@ public class ALApp {
     } public static void addDeposit(Scanner scan) {
         System.out.println("Please Make Your Deposit Below");
         System.out.println("Add Deposit Here");
-        double amout = scan.nextDouble();
+        double amount = scan.nextDouble();
         scan.nextLine();
+        System.out.println();
+
+        System.out.println("Add Description: ");
+        String decription = scan.nextLine();
+
+        System.out.println("Enter Date YYY-MM-DD");
+        String date = scan.nextLine();
+
+
     }
 }
