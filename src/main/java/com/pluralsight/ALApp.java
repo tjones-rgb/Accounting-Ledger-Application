@@ -26,7 +26,7 @@ public class ALApp {
 
             switch (choice) {
                 case "D":
-               //     addDeoposit(scan);
+                    addDeoposit(scan);
                     break;
 
                 case "P":
@@ -34,7 +34,7 @@ public class ALApp {
                     break;
 
                 case "L":
-               //     showLedger(scan);
+                    showLedger(scan);
 
                 case "X":
                     System.out.println("Stay Blessed");
@@ -53,7 +53,8 @@ public class ALApp {
             }
         }
 
-    } public static void addDeposit(Scanner scan) {
+    }
+    public static void addDeposit(Scanner scan) {
         System.out.println("Please Make Your Deposit Below");
         System.out.println("Add Deposit Here");
         double amount = scan.nextDouble();
