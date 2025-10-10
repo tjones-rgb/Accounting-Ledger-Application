@@ -22,7 +22,7 @@ public class ALApp {
             System.out.println("L) Ledger");
             System.out.println("X) Exit");
             System.out.println("PLease Make your Selection");
-            String choice  = scan.nextLine().toUpperCase(Locale.ROOT);
+            String choice  = scan.nextLine().toLowerCase();
 
             switch (choice) {
                 case "D":
@@ -37,6 +37,12 @@ public class ALApp {
                //     showLedger(scan);
 
                 case "X":
+                    System.out.println("Stay Blessed");
+                    appOpen = false;
+                    break;
+
+                default:
+                    System.out.println("Try Again");
 
 
 
@@ -46,5 +52,11 @@ public class ALApp {
                 appOpen = false;
             }
         }
+
+    } public static void addDeposit(Scanner scan) {
+        System.out.println("Please Make Your Deposit Below");
+        System.out.println("Add Deposit Here");
+        double amout = scan.nextDouble();
+        scan.nextLine();
     }
 }
