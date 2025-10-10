@@ -68,5 +68,12 @@ public class ALApp {
 
         System.out.println("Enter Deposit");
         System.out.println("Amount $" + amount);
+        System.out.println("Description" + description);
+        System.out.println("Date" + date);
+    }
+    public static void showLedgar(Scanner scan){
+        System.out.println("Ledgar");
+        System.out.println("Here Are Your Transaction");
+
     }
 }
