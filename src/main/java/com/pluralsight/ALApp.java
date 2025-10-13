@@ -1,5 +1,6 @@
 package com.pluralsight;
 
+import java.io.FileWriter;
 import java.sql.SQLOutput;
 import java.util.Locale;
 import java.util.Scanner;
@@ -21,7 +22,7 @@ public class ALApp {
             System.out.println("P) Make Payment (Debit)");
             System.out.println("L) Ledger");
             System.out.println("X) Exit");
-            System.out.println("PLease Make your Selection");
+            System.out.print("PLease Make your Selection: ");
             String choice  = scan.nextLine().toUpperCase();
 
             switch (choice) {
@@ -34,7 +35,7 @@ public class ALApp {
                     break;
 
                 case "L":
-                    //   showLedgar(scan);
+                       showLedger(scan);
                     break;
 
 
@@ -61,16 +62,17 @@ public class ALApp {
         System.out.println("Add Description: ");
         String description = scan.nextLine();
 
-        System.out.println("Enter Date YYY-MM-DD");
+        System.out.println("Enter Date YYYY-MM-DD");
         String date = scan.nextLine();
 
         System.out.println("Enter Deposit");
         System.out.println("Amount $" + amount);
-       // System.out.println("Description" + description);
+        System.out.println("Description" + description);
         System.out.println("Date" + date);
+        System.out.println("Transaction Complete");
     }
-    public static void showLedgar(Scanner scan){
-        System.out.println("Ledgar");
+    public static void showLedger(Scanner scan){
+        System.out.println("Ledger");
         System.out.println("Here Are Your Transactions");
 
 
@@ -91,9 +93,10 @@ public class ALApp {
 
         System.out.println("Amount: $ " + amount);
 
-      //  System.out.println("Recipient" + recipient);
+        System.out.println("Vendor" + vendor);
 
-       // System.out.println("Date:" + date);
+        System.out.println("Date:" + date);
 
     }
+    FileWriter fileWriter = new FileWriter("src/main/resources/.csv", true); // 'true' for append mode
 }
