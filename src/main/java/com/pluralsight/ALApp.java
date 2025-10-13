@@ -26,7 +26,7 @@ public class ALApp {
 
             switch (choice) {
                 case "D":
-                    addDeoposit(scan);
+                    addDeposit(scan);
                     break;
 
                 case "P":
@@ -34,7 +34,7 @@ public class ALApp {
                     break;
 
                 case "L":
-                    showLedger(scan);
+                 //   showLedger(scan);
 
                 case "X":
                     System.out.println("Stay Blessed");
@@ -74,7 +74,14 @@ public class ALApp {
     }
     public static void showLedgar(Scanner scan){
         System.out.println("Ledgar");
-        System.out.println("Here Are Your Transaction");
+        System.out.println("Here Are Your Transactions");
 
+
+    }
+    public static void makePayment(Scanner scan_){
+        System.out.println( "Make A Payment");
+        System.out.println("Enter Payment Here-----");
+        System.out.println("Who Will this Payment be Made To" );
+        System.out.println("");
     }
 }
