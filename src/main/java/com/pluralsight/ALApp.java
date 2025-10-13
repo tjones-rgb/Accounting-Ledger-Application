@@ -82,6 +82,10 @@ public class ALApp {
         System.out.println( "Make A Payment");
         System.out.println("Enter Payment Here-----");
         System.out.println("Who Will this Payment be Made To" );
-        System.out.println("");
+        System.out.println("Enter Date Here (YYYY-MM-DD)");
+        System.out.println("Payment Complete");
+        System.out.println("Amount: $ " + amount);
+        System.out.println("Reciipent" + recipient);
+        System.out.println("Date:" date);
     }
 }
