@@ -22,7 +22,7 @@ public class ALApp {
             System.out.println("L) Ledger");
             System.out.println("X) Exit");
             System.out.println("PLease Make your Selection");
-            String choice  = scan.nextLine().toLowerCase();
+            String choice  = scan.nextLine().toUpperCase();
 
             switch (choice) {
                 case "D":
@@ -30,11 +30,13 @@ public class ALApp {
                     break;
 
                 case "P":
-                  //  makePayment(scan);
+                    makePayment(scan);
                     break;
 
                 case "L":
-                 //   showLedger(scan);
+                    //   showLedgar(scan);
+                    break;
+
 
                 case "X":
                     System.out.println("Stay Blessed");
@@ -44,13 +46,8 @@ public class ALApp {
                 default:
                     System.out.println("Try Again");
 
-
-
             }
 
-            if (choice.equals("X")){
-                appOpen = false;
-            }
         }
 
     }
@@ -62,14 +59,14 @@ public class ALApp {
         System.out.println();
 
         System.out.println("Add Description: ");
-        String decription = scan.nextLine();
+        String description = scan.nextLine();
 
         System.out.println("Enter Date YYY-MM-DD");
         String date = scan.nextLine();
 
         System.out.println("Enter Deposit");
         System.out.println("Amount $" + amount);
-        System.out.println("Description" + description);
+       // System.out.println("Description" + description);
         System.out.println("Date" + date);
     }
     public static void showLedgar(Scanner scan){
@@ -78,14 +75,25 @@ public class ALApp {
 
 
     }
-    public static void makePayment(Scanner scan_){
+    public static void makePayment(Scanner scan){
         System.out.println( "Make A Payment");
-        System.out.println("Enter Payment Here-----");
+        System.out.print("Enter Payment Here-----");
+        double amount = scan.nextDouble();
+        scan.nextLine();
+
         System.out.println("Who Will this Payment be Made To" );
+        String vendor = scan.nextLine();
+
         System.out.println("Enter Date Here (YYYY-MM-DD)");
-        System.out.println("Payment Complete");
+        String date = scan.nextLine();
+
+        System.out.println("Payment Complete:");
+
         System.out.println("Amount: $ " + amount);
-        System.out.println("Reciipent" + recipient);
-        System.out.println("Date:" date);
+
+      //  System.out.println("Recipient" + recipient);
+
+       // System.out.println("Date:" + date);
+
     }
 }
