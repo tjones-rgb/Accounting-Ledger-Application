@@ -3,16 +3,25 @@ package com.pluralsight;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class ALApp {
+   static ArrayList<String> ledger = new ArrayList<>();
+   static FileWriter twriter;
+   static BufferedWriter writer;
+   static Scanner scan = new Scanner(System.in);
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
+
+        try {
+           twriter = new FileWriter("src/main/resources/Transaction.csv", true);
+            //bufReader.readLine(); //Alternative method to skip first line of csv file
+            writer = new BufferedWriter(twriter);
+        } catch (IOException e) {
+            System.out.println();
+        }
         homeScreen(scan);
-        ArrayList<String> ledger = new ArrayList<>();
+
 
 
     }
@@ -65,15 +74,23 @@ public class ALApp {
 
         System.out.println("Add Description: ");
         String description = scan.nextLine();
-
-        System.out.println("Enter Date YYYY-MM-DD");
-        String date = scan.nextLine();
+        System.out.println("Vendor");
+        String vendor = scan.nextLine();
 
         System.out.println("Enter Deposit");
         System.out.println("Amount $" + amount);
-        System.out.println("Description" + description);
-        System.out.println("Date" + date);
+        System.out.println("Description: "  + description );
+        System.out.println("Vendor: " + vendor );
+        Transaction transaction = new Transaction(description, vendor, amount);
+        try {
+            writer.newLine();
+            writer.write(transaction.getDate() + "|" + transaction.getTime() + "|" + description + "|" + vendor + "|" + amount );
+            writer.flush();
+        } catch (IOException e) {
+            System.out.println("Sorry Try Again");
+        }
         System.out.println("Transaction Complete");
+
     }
 
     public static void makePayment(Scanner scan){
@@ -99,17 +116,8 @@ public class ALApp {
     } public static void showLedger(Scanner scan){
         System.out.println("Ledger");
         System.out.println("Here Are Your Transactions");
-        boolean ledgerOpen = true
-        
-        try {
-            FileWriter fileWriter = new FileWriter("src/main/resources/Transaction.csv", true);
-            //bufReader.readLine(); //Alternative method to skip first line of csv file
-            BufferedWriter writer = new BufferedWriter(fileWriter);
-        } catch (IOException e) {
-            System.out.println();
+        boolean ledgerOpen = true;
 
-        }
-        System.out.println();
 
         while (ledgerOpen) {
            String choice = scan.nextLine().toUpperCase();
@@ -123,18 +131,22 @@ public class ALApp {
 
              switch (choice) {
                  case "A":
-                    // showAll();
+                     showAll();
                      break;
 
                  case "D":
-                     // showDeposits();
+                      showDeposits();
+                      ledger.add("Deposits added");
+                   //   ledger.add("Deposit | Amount: $" + amount + " | Date:" + date);
                      break;
 
                  case "P":
                      // showPayments
+                //     ledger.add("Payment | Amount: -$" + amount + "")
                      break;
 
                  case "R":
+                     //Report
                      break;
 
                  case "H":

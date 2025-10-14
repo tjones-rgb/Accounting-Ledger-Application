@@ -1,37 +1,41 @@
 package com.pluralsight;
 
-public class SetUp {
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+public class Transaction {
 //    date|time|description|vendor|amount
 //2023-04-15|10:13:25|ergonomic keyboard|Amazon|-89.50
 //            2023-04-15|11:15:00|Invoice 1001 paid|Joe|1500.00
 
-    private String date;
-    private String time;
+    private LocalDate date;
+    private LocalTime time;
     private String description;
     private String vendor;
-    private  double amount;
+    private double amount;
 
-    public SetUp(String date, String time, String description, String vendor, double amount) {
-        this.date = date;
-        this.time = time;
+    public Transaction(String description, String vendor, double amount) {
+        this.date = LocalDate.now();
+        this.time = LocalTime.now();
         this.description = description;
         this.vendor = vendor;
         this.amount = amount;
+
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public String getTime() {
+    public LocalTime getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(LocalTime time) {
         this.time = time;
     }
 
@@ -58,6 +62,4 @@ public class SetUp {
     public void setAmount(double amount) {
         this.amount = amount;
     }
-
-
 }
