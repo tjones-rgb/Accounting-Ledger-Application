@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -11,6 +12,7 @@ public class ALApp {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         homeScreen(scan);
+        ArrayList<String> ledger = new ArrayList<>();
 
 
     }
@@ -97,15 +99,81 @@ public class ALApp {
     } public static void showLedger(Scanner scan){
         System.out.println("Ledger");
         System.out.println("Here Are Your Transactions");
-
-        FileWriter fileWriter = null;
+        boolean ledgerOpen = true
+        
         try {
-            fileWriter = new FileWriter("src/main/resources/Transaction.csv", true);
+            FileWriter fileWriter = new FileWriter("src/main/resources/Transaction.csv", true);
+            //bufReader.readLine(); //Alternative method to skip first line of csv file
+            BufferedWriter writer = new BufferedWriter(fileWriter);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println();
+
         }
-        BufferedWriter writer = new BufferedWriter(fileWriter);
+        System.out.println();
+
+        while (ledgerOpen) {
+           String choice = scan.nextLine().toUpperCase();
+            System.out.println("Welcome To Your Ledger");
+            System.out.println("Options");
+            System.out.println("A) All");
+            System.out.println("D) Deposits");
+            System.out.println("P) Payments");
+            System.out.println("R) Reports");
+            System.out.println("H) Home");
+
+             switch (choice) {
+                 case "A":
+                    // showAll();
+                     break;
+
+                 case "D":
+                     // showDeposits();
+                     break;
+
+                 case "P":
+                     // showPayments
+                     break;
+
+                 case "R":
+                     break;
+
+                 case "H":
+                     // ledgerOpen = false;
+                     break;
+
+                 default:
+                     System.out.println("Stay Blessed And Try Again");
+
+
+             }
+        }
 
     }
+        public static void showAll() {
+            System.out.println("Here Are Your Transaction");
+            for (int i = ledger.size() - 1; i >= 0; i--) {
+                System.out.println(ledger.get(i));
 
+            }
+        }
+        public  static void showDeposits() {
+            System.out.println("Here Are Your Deposits");
+            for (int i = ledger.size() -1; i >= 0; i--) {
+                String entry = ledger.get(i);
+                if(entry.contains("Deposits")) {
+                    System.out.println(entry);
+
+                }
+            }
+        }
+        public static void showPayments(){
+            System.out.println("Here Are Your Deposits");
+            for (int i = ledger.size() -1; i >=0; i--){
+                String entry = ledger.get(i);
+                if (entry.contains("Payment")){
+                    System.out.println(entry);
+                }
+            }
+        }
 }
+
