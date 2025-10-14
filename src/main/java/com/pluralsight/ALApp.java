@@ -1,6 +1,8 @@
 package com.pluralsight;
 
+import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.SQLOutput;
 import java.util.Locale;
 import java.util.Scanner;
@@ -71,12 +73,7 @@ public class ALApp {
         System.out.println("Date" + date);
         System.out.println("Transaction Complete");
     }
-    public static void showLedger(Scanner scan){
-        System.out.println("Ledger");
-        System.out.println("Here Are Your Transactions");
 
-
-    }
     public static void makePayment(Scanner scan){
         System.out.println( "Make A Payment");
         System.out.print("Enter Payment Here-----");
@@ -97,6 +94,18 @@ public class ALApp {
 
         System.out.println("Date:" + date);
 
+    } public static void showLedger(Scanner scan){
+        System.out.println("Ledger");
+        System.out.println("Here Are Your Transactions");
+
+        FileWriter fileWriter = null;
+        try {
+            fileWriter = new FileWriter("src/main/resources/Transaction.csv", true);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        BufferedWriter writer = new BufferedWriter(fileWriter);
+
     }
-    FileWriter fileWriter = new FileWriter("src/main/resources/.csv", true); // 'true' for append mode
+
 }
