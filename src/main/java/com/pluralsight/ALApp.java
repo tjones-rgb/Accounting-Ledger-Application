@@ -98,20 +98,25 @@ public class ALApp {
         System.out.print("Enter Payment Here-----");
         double amount = scan.nextDouble();
         scan.nextLine();
-
+        amount = -amount;
         System.out.println("Who Will this Payment be Made To" );
         String vendor = scan.nextLine();
 
-        System.out.println("Enter Date Here (YYYY-MM-DD)");
-        String date = scan.nextLine();
-
-        System.out.println("Payment Complete:");
+        System.out.println("Add Description");
+        String description = scan.nextLine();
 
         System.out.println("Amount: $ " + amount);
-
         System.out.println("Vendor" + vendor);
 
-        System.out.println("Date:" + date);
+        Transaction transaction = new Transaction(description, vendor, amount);
+        try {
+            writer.newLine();
+            writer.write(transaction.getDate() + "|" + transaction.getTime() + "|"+ "|" + vendor + "|" + amount );
+            writer.flush();
+        } catch (IOException e) {
+            System.out.println("Sorry Try Again");
+        } System.out.println("Payment Complete:");
+
 
     } public static void showLedger(Scanner scan){
         System.out.println("Ledger");
@@ -141,12 +146,13 @@ public class ALApp {
                      break;
 
                  case "P":
-                     // showPayments
+                      showPayments();
                 //     ledger.add("Payment | Amount: -$" + amount + "")
                      break;
 
                  case "R":
-                     //Report
+                     System.out.println("Reports");
+                     //Report should show list
                      break;
 
                  case "H":
@@ -165,6 +171,7 @@ public class ALApp {
             System.out.println("Here Are Your Transaction");
             for (int i = ledger.size() - 1; i >= 0; i--) {
                 System.out.println(ledger.get(i));
+
 
             }
         }
