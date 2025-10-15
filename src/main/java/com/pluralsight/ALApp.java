@@ -115,7 +115,7 @@ public class ALApp {
             writer.flush();
         } catch (IOException e) {
             System.out.println("Sorry Try Again");
-        } System.out.println("Payment Complete:");
+        } System.out.println("Payment Complete: " + transaction);
 
 
     } public static void showLedger(Scanner scan){
@@ -152,11 +152,11 @@ public class ALApp {
 
                  case "R":
                      System.out.println("Reports");
-                     //Report should show list
+                     showReports(scan);
                      break;
 
                  case "H":
-                     // ledgerOpen = false;
+                      ledgerOpen = false;
                      break;
 
                  default:
@@ -194,5 +194,70 @@ public class ALApp {
                 }
             }
         }
+
+        public static void showReports (Scanner scan) {
+        boolean reportOpen = true;
+        while (reportOpen) {
+            System.out.println("Reports Menu");
+            System.out.println("1) Month To Date");
+            System.out.println("2) Previous Month");
+            System.out.println("3) Year To Date");
+            System.out.println("4) Previous Year");
+            System.out.println("5) Search By Vendor");
+//            prompt the user for the vendor name
+//            and display all entries for that vendor
+            System.out.println("0) Back");
+            System.out.print("Make Your Selection: ");
+
+            String selection = scan.nextLine();
+
+            switch (selection) {
+                case "1":
+                    System.out.println(" > Month To Date");
+                    break;
+
+                case "2":
+                    System.out.println(" > Previous Date");
+                    break;
+
+                case "3":
+                    System.out.println(" > Year To Date");
+                    break;
+
+                case "4":
+                    System.out.println(" > Previous Year");
+                    break;
+
+                case "5":
+                    searchByVendor(scan);
+                    break;
+
+                case "0":
+                    reportOpen = false;
+                    break;
+
+                default:
+                    System.out.println("Error Please Try Again");
+
+            }
+        }
+    }
+    public static void searchByVendor(Scanner scan){
+        System.out.print("Enter Vendor Name Here: ");
+        String vendorName = scan.nextLine().toLowerCase();
+
+        System.out.println("Results Of Vendors");
+
+        for (int i = ledger.size() - 1; i >= 0; i--){
+            String entry = ledger.get(i).toLowerCase();
+            if(entry.contains(vendorName)){
+                System.out.println(ledger.get(i));
+
+            }
+        }if (!true){
+            System.out.println("No Transactions Were Made");
+        }
+
+    }
 }
 
