@@ -125,7 +125,7 @@ public class ALApp {
 
 
         while (ledgerOpen) {
-           String choice = scan.nextLine().toUpperCase();
+
             System.out.println("Welcome To Your Ledger");
             System.out.println("Options");
             System.out.println("A) All");
@@ -133,7 +133,7 @@ public class ALApp {
             System.out.println("P) Payments");
             System.out.println("R) Reports");
             System.out.println("H) Home");
-
+            String choice = scan.nextLine().toUpperCase();
              switch (choice) {
                  case "A":
                      showAll();
@@ -254,10 +254,10 @@ public class ALApp {
                 System.out.println(ledger.get(i));
 
             }
-        }if (!true){
+        }if (true){
             System.out.println("No Transactions Were Made");
         }
+        }
 
-    }
 }
 
