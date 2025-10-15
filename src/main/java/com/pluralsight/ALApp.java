@@ -213,19 +213,23 @@ public class ALApp {
 
             switch (selection) {
                 case "1":
-                    System.out.println(" > Month To Date");
+                  showMonthToDate();
+                    // Month To Date
                     break;
 
                 case "2":
-                    System.out.println(" > Previous Date");
+                   showPreviousMonth();
+                   // Previous Date
                     break;
 
                 case "3":
-                    System.out.println(" > Year To Date");
+                     showYearToDate();
+                    // Year To Date
                     break;
 
                 case "4":
-                    System.out.println(" > Previous Year");
+                     showPreviousYear();
+                  // Previous Year
                     break;
 
                 case "5":
@@ -239,6 +243,63 @@ public class ALApp {
                 default:
                     System.out.println("Error Please Try Again");
 
+
+
+               }
+            }
+        }
+
+    public static void showMonthToDate() {
+        System.out.println("Month To Date Transaction:");
+        java.time.LocalDate today = java.time.LocalDate.now();
+        int currentMonth = today.getMonthValue();
+        int currentYear = today.getYear();
+        for (int i = ledger.size() - 1; i >= 0; i--) {
+            String entry = ledger.get(i);
+
+            if (entry.contains((today.getMonth().toString().substring(0, 3)))) {
+                System.out.println(entry);
+            }
+        }
+    }
+    public static void showPreviousMonth() {
+        System.out.println("Previous Month Transactions");
+        java.time.LocalDate today = java.time.LocalDate.now();
+        int currentMonth = today.getMonthValue();
+        int currentYear = today.getYear();
+        int previousMonth = currentMonth -1;
+        int yearOfPreviousMonth = currentYear;
+        if (previousMonth ==0) {
+            previousMonth = 12;
+            yearOfPreviousMonth--;
+        }
+        for(int i= ledger.size() - 1; i >=0; i--) {
+            String entry = ledger.get(i);
+            String monthText = String.format("-%02d-",previousMonth);
+            if (entry.contains(monthText)){
+                System.out.println(entry);
+            }
+        }
+    }
+    public static void showPreviousYear(){
+        System.out.println("Previous Year Transactions:");
+        java.time.LocalDate today = java.time.LocalDate.now();
+        int previousYear = today.getYear() -1;
+        for(int i = ledger.size() -1; i >= 0; i--) {
+            String entry = ledger.get(i);
+            if(entry.contains(String.valueOf(previousYear))){
+                System.out.println(entry);
+            }
+        }
+    }
+    public static void showYearToDate(){
+        System.out.println("Year To Date Transactions");
+        java.time.LocalDate today = java.time.LocalDate.now();
+        int currentYear = today.getYear();
+        for(int i = ledger.size() - 1; i >= 0; i--){
+            String entry = ledger.get(i);
+            if (entry.contains(String.valueOf(currentYear))){
+                System.out.println(entry);
             }
         }
     }
