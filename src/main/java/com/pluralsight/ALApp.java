@@ -140,7 +140,9 @@ public class ALApp {
             System.out.println("P) Payments");
             System.out.println("R) Reports");
             System.out.println("H) Home");
+            System.out.println("Please Make Your Selection:");
             String choice = scan.nextLine().toUpperCase();
+
             switch (choice) {
                 case "A":
                     showAll();
@@ -153,6 +155,7 @@ public class ALApp {
                     break;
 
                 case "P":
+                    System.out.println("Payments");
                     showPayments();
                     //     ledger.add("Payment | Amount: -$" + amount + "")
                     break;
@@ -273,7 +276,7 @@ public class ALApp {
 
         for (int i = ledger.size() - 1; i >= 0; i--) {
                 Transaction entry = ledger.get(i);
-                java.time.LocalDate entryDate = java.time.LocalDate.parse(entry.getDate());
+                java.time.LocalDate entryDate = entry.getDate();
 
                 if (entryDate.getMonthValue() == currentMonth && entryDate.getYear() == currentYear) {
                     System.out.println(entry);
@@ -295,7 +298,7 @@ public class ALApp {
             }
             for (int i = ledger.size() - 1; i >= 0; i--) {
                 Transaction entry = ledger.get(i);
-                java.time.LocalDate entryDate = java.time.LocalDate.parse(entry.getDate());
+                java.time.LocalDate entryDate = entry.getDate();
                 if (entryDate.getMonthValue() == previousMonth && entryDate.getYear() == yearOfPreviousMonth) {
                     System.out.println(entry);
                 }
@@ -309,7 +312,7 @@ public class ALApp {
 
             for (int i = ledger.size() - 1; i >= 0; i--) {
                 Transaction entry = ledger.get(i);
-                java.time.LocalDate entryDate = java.time.LocalDate.parse(entry.getDate());
+                java.time.LocalDate entryDate = entry.getDate();
 
                 if (entryDate.getYear() == previousYear) {
                     System.out.println(entry);
@@ -324,7 +327,7 @@ public class ALApp {
 
             for (int i = ledger.size() - 1; i >= 0; i--) {
                 Transaction entry = ledger.get(i);
-               java.time.LocalDate entryDate = java.time.LocalDate.parse(entry.getDate());
+               java.time.LocalDate entryDate = entry.getDate();
 
                if (entryDate.getYear() == currentYear) {
                     System.out.println(entry);
@@ -352,5 +355,5 @@ public class ALApp {
             }
         }
     }
-}
+
 
