@@ -7,14 +7,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ALApp {
-   static ArrayList<String> ledger = new ArrayList<>();
-   static FileWriter twriter;
-   static BufferedWriter writer;
-   static Scanner scan = new Scanner(System.in);
+    static ArrayList<Transaction> ledger = new ArrayList<>();
+    static FileWriter twriter;
+    static BufferedWriter writer;
+    static Scanner scan = new Scanner(System.in);
+
     public static void main(String[] args) {
 
         try {
-           twriter = new FileWriter("src/main/resources/Transaction.csv", true);
+            twriter = new FileWriter("src/main/resources/Transaction.csv", true);
             //bufReader.readLine(); //Alternative method to skip first line of csv file
             writer = new BufferedWriter(twriter);
         } catch (IOException e) {
@@ -23,20 +24,20 @@ public class ALApp {
         homeScreen(scan);
 
 
-
     }
-    public static void homeScreen(Scanner scan){
+
+    public static void homeScreen(Scanner scan) {
         boolean appOpen = true;
 
-        while (appOpen){
-        System.out.println("Welcome To Your Banking App");
+        while (appOpen) {
+            System.out.println("Welcome To Your Banking App");
             System.out.println();
             System.out.println("D) Add Deposit");
             System.out.println("P) Make Payment (Debit)");
             System.out.println("L) Ledger");
             System.out.println("X) Exit");
             System.out.print("PLease Make your Selection: ");
-            String choice  = scan.nextLine().toUpperCase();
+            String choice = scan.nextLine().toUpperCase();
 
             switch (choice) {
                 case "D":
@@ -48,7 +49,7 @@ public class ALApp {
                     break;
 
                 case "L":
-                       showLedger(scan);
+                    showLedger(scan);
                     break;
 
 
@@ -65,6 +66,7 @@ public class ALApp {
         }
 
     }
+
     public static void addDeposit(Scanner scan) {
         System.out.println("Please Make Your Deposit Below");
         System.out.println("Add Deposit Here");
@@ -79,12 +81,13 @@ public class ALApp {
 
         System.out.println("Enter Deposit");
         System.out.println("Amount $" + amount);
-        System.out.println("Description: "  + description );
-        System.out.println("Vendor: " + vendor );
+        System.out.println("Description: " + description);
+        System.out.println("Vendor: " + vendor);
         Transaction transaction = new Transaction(description, vendor, amount);
+        ledger.add(transaction);
         try {
             writer.newLine();
-            writer.write(transaction.getDate() + "|" + transaction.getTime() + "|" + description + "|" + vendor + "|" + amount );
+            writer.write(transaction.getDate() + "|" + transaction.getTime() + "|" + description + "|" + vendor + "|" + amount);
             writer.flush();
         } catch (IOException e) {
             System.out.println("Sorry Try Again");
@@ -93,13 +96,13 @@ public class ALApp {
 
     }
 
-    public static void makePayment(Scanner scan){
-        System.out.println( "Make A Payment");
+    public static void makePayment(Scanner scan) {
+        System.out.println("Make A Payment");
         System.out.print("Enter Payment Here-----");
         double amount = scan.nextDouble();
         scan.nextLine();
         amount = -amount;
-        System.out.println("Who Will this Payment be Made To" );
+        System.out.println("Who Will this Payment be Made To");
         String vendor = scan.nextLine();
 
         System.out.println("Add Description");
@@ -109,16 +112,20 @@ public class ALApp {
         System.out.println("Vendor" + vendor);
 
         Transaction transaction = new Transaction(description, vendor, amount);
+        ledger.add(transaction);
         try {
             writer.newLine();
-            writer.write(transaction.getDate() + "|" + transaction.getTime() + "|"+ "|" + vendor + "|" + amount );
+            writer.write(transaction.getDate() + "|" + transaction.getTime() + "|" + description + "|" + vendor + "|" + amount);
             writer.flush();
         } catch (IOException e) {
             System.out.println("Sorry Try Again");
-        } System.out.println("Payment Complete: " + transaction);
+        }
+        System.out.println("Payment Complete: " + transaction);
 
 
-    } public static void showLedger(Scanner scan){
+    }
+
+    public static void showLedger(Scanner scan) {
         System.out.println("Ledger");
         System.out.println("Here Are Your Transactions");
         boolean ledgerOpen = true;
@@ -134,68 +141,76 @@ public class ALApp {
             System.out.println("R) Reports");
             System.out.println("H) Home");
             String choice = scan.nextLine().toUpperCase();
-             switch (choice) {
-                 case "A":
-                     showAll();
-                     break;
+            switch (choice) {
+                case "A":
+                    showAll();
+                    break;
 
-                 case "D":
-                      showDeposits();
-                      ledger.add("Deposits added");
-                   //   ledger.add("Deposit | Amount: $" + amount + " | Date:" + date);
-                     break;
+                case "D":
+                    showDeposits();
+                    //   ledger.add("Deposits added");
+                    //   ledger.add("Deposit | Amount: $" + amount + " | Date:" + date);
+                    break;
 
-                 case "P":
-                      showPayments();
-                //     ledger.add("Payment | Amount: -$" + amount + "")
-                     break;
+                case "P":
+                    showPayments();
+                    //     ledger.add("Payment | Amount: -$" + amount + "")
+                    break;
 
-                 case "R":
-                     System.out.println("Reports");
-                     showReports(scan);
-                     break;
+                case "R":
+                    System.out.println("Reports");
+                    showReports(scan);
+                    break;
 
-                 case "H":
-                      ledgerOpen = false;
-                     break;
+                case "H":
+                    ledgerOpen = false;
+                    break;
 
-                 default:
-                     System.out.println("Stay Blessed And Try Again");
+                default:
+                    System.out.println("Stay Blessed And Try Again");
 
 
-             }
+            }
         }
 
     }
-        public static void showAll() {
-            System.out.println("Here Are Your Transaction");
-            for (int i = ledger.size() - 1; i >= 0; i--) {
-                System.out.println(ledger.get(i));
+
+    public static void showAll() {
+        System.out.println("Here Are Your Transaction");
+        for (int i = ledger.size() - 1; i >= 0; i--) {
+            System.out.println(ledger.get(i));
 
 
-            }
         }
-        public  static void showDeposits() {
-            System.out.println("Here Are Your Deposits");
-            for (int i = ledger.size() -1; i >= 0; i--) {
-                String entry = ledger.get(i);
-                if(entry.contains("Deposits")) {
-                    System.out.println(entry);
+    }
 
-                }
-            }
+    public static void showDeposits() {
+        System.out.println("Here Are Your Deposits");
+        for (int i = ledger.size() - 1; i >= 0; i--) {
+            Transaction entry = ledger.get(i);
+            if (entry.getAmount() > 0)
+                System.out.println(entry);
+
+
         }
-        public static void showPayments(){
-            System.out.println("Here Are Your Deposits");
-            for (int i = ledger.size() -1; i >=0; i--){
-                String entry = ledger.get(i);
-                if (entry.contains("Payment")){
-                    System.out.println(entry);
-                }
-            }
+    }
+
+    public static void showPayments() {
+        System.out.println("Here Are Your Payments");
+        if (ledger.isEmpty()) {
+            System.out.println("No Payments Have Been Made");
+            return;
         }
 
-        public static void showReports (Scanner scan) {
+        for (int i = ledger.size() - 1; i >= 0; i--) {
+            Transaction entry = ledger.get(i);
+
+            System.out.println(entry);
+        }
+
+    }
+
+    public static void showReports(Scanner scan) {
         boolean reportOpen = true;
         while (reportOpen) {
             System.out.println("Reports Menu");
@@ -213,23 +228,23 @@ public class ALApp {
 
             switch (selection) {
                 case "1":
-                  showMonthToDate();
+                    showMonthToDate();
                     // Month To Date
                     break;
 
                 case "2":
-                   showPreviousMonth();
-                   // Previous Date
+                    showPreviousMonth();
+                    // Previous Date
                     break;
 
                 case "3":
-                     showYearToDate();
+                    showYearToDate();
                     // Year To Date
                     break;
 
                 case "4":
-                     showPreviousYear();
-                  // Previous Year
+                    showPreviousYear();
+                    // Previous Year
                     break;
 
                 case "5":
@@ -244,81 +259,98 @@ public class ALApp {
                     System.out.println("Error Please Try Again");
 
 
-
-               }
             }
         }
+    }
 
     public static void showMonthToDate() {
         System.out.println("Month To Date Transaction:");
         java.time.LocalDate today = java.time.LocalDate.now();
         int currentMonth = today.getMonthValue();
         int currentYear = today.getYear();
+
+
+
         for (int i = ledger.size() - 1; i >= 0; i--) {
-            String entry = ledger.get(i);
+                Transaction entry = ledger.get(i);
+                java.time.LocalDate entryDate = java.time.LocalDate.parse(entry.getDate());
 
-            if (entry.contains((today.getMonth().toString().substring(0, 3)))) {
-                System.out.println(entry);
+                if (entryDate.getMonthValue() == currentMonth && entryDate.getYear() == currentYear) {
+                    System.out.println(entry);
+                }
+            }
+        }
+
+        public static void showPreviousMonth () {
+            System.out.println("Previous Month Transactions");
+            java.time.LocalDate today = java.time.LocalDate.now();
+            int currentMonth = today.getMonthValue();
+            int currentYear = today.getYear();
+            int previousMonth = currentMonth - 1;
+            int yearOfPreviousMonth = currentYear;
+
+            if (previousMonth == 0) {
+                previousMonth = 12;
+                yearOfPreviousMonth--;
+            }
+            for (int i = ledger.size() - 1; i >= 0; i--) {
+                Transaction entry = ledger.get(i);
+                java.time.LocalDate entryDate = java.time.LocalDate.parse(entry.getDate());
+                if (entryDate.getMonthValue() == previousMonth && entryDate.getYear() == yearOfPreviousMonth) {
+                    System.out.println(entry);
+                }
+            }
+        }
+
+        public static void showPreviousYear () {
+            System.out.println("Previous Year Transactions:");
+            java.time.LocalDate today = java.time.LocalDate.now();
+            int previousYear = today.getYear() - 1;
+
+            for (int i = ledger.size() - 1; i >= 0; i--) {
+                Transaction entry = ledger.get(i);
+                java.time.LocalDate entryDate = java.time.LocalDate.parse(entry.getDate());
+
+                if (entryDate.getYear() == previousYear) {
+                    System.out.println(entry);
+                }
+            }
+        }
+
+        public static void showYearToDate () {
+            System.out.println("Year To Date Transactions");
+            java.time.LocalDate today = java.time.LocalDate.now();
+            int currentYear = today.getYear();
+
+            for (int i = ledger.size() - 1; i >= 0; i--) {
+                Transaction entry = ledger.get(i);
+               java.time.LocalDate entryDate = java.time.LocalDate.parse(entry.getDate());
+
+               if (entryDate.getYear() == currentYear) {
+                    System.out.println(entry);
+                }
+            }
+        }
+
+        public static void searchByVendor (Scanner scan){
+            System.out.print("Enter Vendor Name Here: ");
+            String vendorName = scan.nextLine().toLowerCase();
+            System.out.println("Results Of Vendors");
+            boolean found = false;
+
+            for (int i = ledger.size() - 1; i >= 0; i--) {
+                Transaction entry = ledger.get(i);
+
+                if (entry.getVendor().toLowerCase().contains(vendorName)) {
+                    System.out.println(ledger.get(i));
+                    found = true;
+
+                }
+            }
+            if (!found) {
+                System.out.println("No Transactions Were Made");
             }
         }
     }
-    public static void showPreviousMonth() {
-        System.out.println("Previous Month Transactions");
-        java.time.LocalDate today = java.time.LocalDate.now();
-        int currentMonth = today.getMonthValue();
-        int currentYear = today.getYear();
-        int previousMonth = currentMonth -1;
-        int yearOfPreviousMonth = currentYear;
-        if (previousMonth ==0) {
-            previousMonth = 12;
-            yearOfPreviousMonth--;
-        }
-        for(int i= ledger.size() - 1; i >=0; i--) {
-            String entry = ledger.get(i);
-            String monthText = String.format("-%02d-",previousMonth);
-            if (entry.contains(monthText)){
-                System.out.println(entry);
-            }
-        }
-    }
-    public static void showPreviousYear(){
-        System.out.println("Previous Year Transactions:");
-        java.time.LocalDate today = java.time.LocalDate.now();
-        int previousYear = today.getYear() -1;
-        for(int i = ledger.size() -1; i >= 0; i--) {
-            String entry = ledger.get(i);
-            if(entry.contains(String.valueOf(previousYear))){
-                System.out.println(entry);
-            }
-        }
-    }
-    public static void showYearToDate(){
-        System.out.println("Year To Date Transactions");
-        java.time.LocalDate today = java.time.LocalDate.now();
-        int currentYear = today.getYear();
-        for(int i = ledger.size() - 1; i >= 0; i--){
-            String entry = ledger.get(i);
-            if (entry.contains(String.valueOf(currentYear))){
-                System.out.println(entry);
-            }
-        }
-    }
-    public static void searchByVendor(Scanner scan){
-        System.out.print("Enter Vendor Name Here: ");
-        String vendorName = scan.nextLine().toLowerCase();
-
-        System.out.println("Results Of Vendors");
-
-        for (int i = ledger.size() - 1; i >= 0; i--){
-            String entry = ledger.get(i).toLowerCase();
-            if(entry.contains(vendorName)){
-                System.out.println(ledger.get(i));
-
-            }
-        }if (true){
-            System.out.println("No Transactions Were Made");
-        }
-        }
-
 }
 
