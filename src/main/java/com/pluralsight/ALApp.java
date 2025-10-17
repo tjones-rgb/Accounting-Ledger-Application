@@ -150,14 +150,11 @@ public class ALApp {
 
                 case "D":
                     showDeposits();
-                    //   ledger.add("Deposits added");
-                    //   ledger.add("Deposit | Amount: $" + amount + " | Date:" + date);
                     break;
 
                 case "P":
                     System.out.println("Payments");
                     showPayments();
-                    //     ledger.add("Payment | Amount: -$" + amount + "")
                     break;
 
                 case "R":
@@ -222,9 +219,6 @@ public class ALApp {
             System.out.println("3) Year To Date");
             System.out.println("4) Previous Year");
             System.out.println("5) Search By Vendor");
-//            prompt the user for the vendor name
-//            and display all entries for that vendor
-            System.out.println("0) Back");
             System.out.print("Make Your Selection: ");
 
             String selection = scan.nextLine();
